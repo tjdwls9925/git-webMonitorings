@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient" style="background-color: aliceblue;">
 
     <div class="container">
 
