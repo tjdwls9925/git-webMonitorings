@@ -33,7 +33,7 @@
         <!-- 사이드바 -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 				
-				<%@ include file="./fix/sidebar.jsp" %>
+				<%@ include file="../fix/sidebar.jsp" %>
 	
         </ul>
         <!-- 사이드바 끝 -->
@@ -46,7 +46,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-						<%@ include file="./fix/header.jsp" %>
+						<%@ include file="../fix/header.jsp" %>
                 </nav>
                 <!-- End of Topbar -->
 
@@ -55,7 +55,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">날씨</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -64,7 +64,7 @@
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-				<%@ include file="./fix/footer.jsp" %>
+				<%@ include file="../fix/footer.jsp" %>
             </footer>
             <!-- End of Footer -->
         </div>
