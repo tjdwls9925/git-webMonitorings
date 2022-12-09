@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.grow.weather.mapper.WeatherMapper">
+
+<select id="SelectWeatherLocationName" resultMap="SelectWeatherLocationNameMap">
+	select * from region
+	where instant_x = #{nx}
+	and instant_y = #{ny}
+</select>
+
+
+<resultMap id="SelectWeatherLocationNameMap" type="com.master.grow.weather.to.WeatherTO">
+	<result property="Area" column="area"></result>
+	<result property="City" column="city"></result>
+	<result property="RegionName" column="region_name"></result>
+	<result property="InstantX" column="instant_x"></result>
+	<result property="InstantY" column="instant_y"></result>
+</resultMap>
+
+</mapper>

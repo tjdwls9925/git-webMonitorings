@@ -9,7 +9,7 @@
 <body>
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>¹é¼ºÁø &copy;My WebSite</span>
                     </div>
                 </div>
 </body>
