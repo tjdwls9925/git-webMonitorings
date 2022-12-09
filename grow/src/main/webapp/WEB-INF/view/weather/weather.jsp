@@ -186,9 +186,30 @@
                     </div>
                     
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">날씨 예보</h1>
+                        <h1 class="h3 mb-0 text-gray-800">오늘의 날씨 예보</h1>
+                    </div>      
+                                  
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <p id="this_date"></p>
                     </div>
                     
+                    	<div class="table-responsive">
+                            	<table class="table table-light table-striped text-center" style="color:black;">
+								  <thead>
+								    <tr>
+								      <th scope="col" class='small'>시각</th>
+								      <th scope="col" class='small'>날씨</th>
+								      <th scope="col" class='small'>기온</th>
+								      <th scope="col" class='small'>강수량</th>
+								      <th scope="col" class='small'>강수확률</th>
+								      <th scope="col" class='small'>바람</th>
+								      <th scope="col" class='small'>습도</th>
+								    </tr>
+								  </thead>
+								  <tbody id="tbody_value">
+								  </tbody>
+								</table>
+                    	</div>
                 </div>
             </div>
 
@@ -226,6 +247,26 @@
     
     $(document).ready(function(){
     	
+    	const serviceKey = 'e7Z1AnD0iQgs%2BUq9QLRT5V6SiB%2B97Z9GX%2BLTjzkxSMC%2BsEl0wr2Z3aBcTs12JHueD8hVr%2FSUXA5RYPesf8tLow%3D%3D';
+    	const numOfRows = '60'; //row
+    	const pageNo = '1'; //페이지
+    	 
+    	let today = new Date();
+       
+    	let week = ['일', '월', '화', '수', '목', '금', '토'];
+        
+    	let year = today.getFullYear();
+       
+    	let month = today.getMonth() + 1;
+        
+    	let day = today.getDate();
+        
+    	let hours = today.getHours();
+       
+    	let minutes = today.getMinutes();
+
+    	
+    	
         function SunRiseOfSunSet(lon, lat) {
 	        let url = 'https://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getLCRiseSetInfo';
 	        const serviceKey = 'e7Z1AnD0iQgs%2BUq9QLRT5V6SiB%2B97Z9GX%2BLTjzkxSMC%2BsEl0wr2Z3aBcTs12JHueD8hVr%2FSUXA5RYPesf8tLow%3D%3D';
@@ -251,28 +292,117 @@
             }
         })
     }
+        
+        function weatherForecast(nx,ny){
+        	const date = year + "" + month + "" + day;
+        	let dateMsg =  year + "년" + month + "월" + day + "일";
+        	
+        	$("#this_date").html(dateMsg);
+        	
+			
+        	
+        	const url = "https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=e7Z1AnD0iQgs%2BUq9QLRT5V6SiB%2B97Z9GX%2BLTjzkxSMC%2BsEl0wr2Z3aBcTs12JHueD8hVr%2FSUXA5RYPesf8tLow%3D%3D&pageNo=1&numOfRows=1000&dataType=json&base_date="+date+"&base_time=0500&nx="+nx+"&ny="+ny+""
+        
+        	$.ajax({
+	            url: url,
+	            dataType: "json",
+	            type: "GET",
+	            async: "false",
+	            success: function (data) {
+	                console.log(data);
+
+	                
+	                
+	                let str = "";
+	                let timeCode = ["06시","07시","08시","09시","10시","11시","12시","13시","14시","15시","16시","17시","18시","19시","20시","21시","22시","23시"];
+            		let skyCode = [];
+            		let tmpCode = [];
+            		let vecCode = [];
+            		let wsdCode = [];
+            		let pcpCode = [];
+            		let popCode = [];
+            		let rehCode = [];
+            		let vecDirection;
+            		
+            		
+	                for(let x=0; x<data.response.body.items.item.length; x++){
+	                	if(data.response.body.items.item[x].fcstDate == date){	                		
+	                		console.log(data.response.body.items.item[x].fcstDate);
+	                		
+	                		if(data.response.body.items.item[x].category == "SKY"){
+	                			if(data.response.body.items.item[x].fcstValue == 1){
+	                				skyCode.push("맑음"); 
+	                			}else if(data.response.body.items.item[x].fcstValue == 3){
+	                				skyCode.push("구름많음");
+	                			}else if(data.response.body.items.item[x].fcstValue == 4){
+	                				skyCode.push("흐림");
+	                			}
+	                		}
+	                		
+	                		if(data.response.body.items.item[x].category == "TMP"){
+	                			tmpCode.push(data.response.body.items.item[x].fcstValue);
+	                		}
+	                		
+	                		if(data.response.body.items.item[x].category == "VEC"){
+	                			
+	                			
+	                			if(data.response.body.items.item[x].fcstValue <= 45){
+	                            	vecCode.push("북");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 90){
+	                            	vecCode.push("북동");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 135){
+	                            	vecCode.push("동");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 180){
+	                            	vecCode.push("남동");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 225){
+	                            	vecCode.push("남");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 270){
+	                            	vecCode.push("남서");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 315){
+	                            	vecCode.push("서");
+	                            }else if(data.response.body.items.item[x].fcstValue <= 360){
+	                            	vecCode.push("북서");
+	                            }
+	                		}
+	                		if(data.response.body.items.item[x].category == "WSD"){
+	                			wsdCode.push(data.response.body.items.item[x].fcstValue);
+	                		}
+	                		if(data.response.body.items.item[x].category == "PCP"){
+	                			pcpCode.push(data.response.body.items.item[x].fcstValue);
+	                		}
+	                		if(data.response.body.items.item[x].category == "POP"){
+	                			popCode.push(data.response.body.items.item[x].fcstValue);
+	                		}
+	                		if(data.response.body.items.item[x].category == "REH"){
+	                			rehCode.push(data.response.body.items.item[x].fcstValue);
+	                		}
+	                	}
+	                }
+	             	console.log(vecCode);
+	                
+	                
+	                
+	                for(let x=0; x<timeCode.length; x++){
+	                	str += "<tr>"
+	                	+	"<td class='small'>" + timeCode[x] + "</td>"
+	                	+	"<td class='small'>" + skyCode[x] + "</td>"
+	                	+	"<td class='small'>" + tmpCode[x] + "°C</td>"
+	                	+	"<td class='small'>" + pcpCode[x] + "</td>"
+	                	+	"<td class='small'>" + popCode[x] + "%</td>"
+	                	+	"<td class='small'>" + vecCode[x] +" "+ wsdCode[x] + " m/s</td>"
+	                	+	"<td class='small'>" + rehCode[x] + "%</td>";
+	                }
+	                
+	                $("#tbody_value").html(str);
+	                
+            	}
+        	})
+  		 }
     	
     	
     	
-    	const serviceKey = 'e7Z1AnD0iQgs%2BUq9QLRT5V6SiB%2B97Z9GX%2BLTjzkxSMC%2BsEl0wr2Z3aBcTs12JHueD8hVr%2FSUXA5RYPesf8tLow%3D%3D';
-        
-    	const numOfRows = '60'; //row
-        
-    	const pageNo = '1'; //페이지
-        
-    	let today = new Date();
-        
-    	let week = ['일', '월', '화', '수', '목', '금', '토'];
-        
-    	let year = today.getFullYear();
+ 
        
-    	let month = today.getMonth() + 1;
-        
-    	let day = today.getDate();
-        
-    	let hours = today.getHours();
-       
-    	let minutes = today.getMinutes();
     	
         $(document).ready(function () {
             
@@ -296,12 +426,6 @@
             console.log(hours + "" + minutes);
             
             askForCoords();
-
-            $("#main_data_show").show();
-            $("#weather_show").hide();
-            $("#notice_show").hide();
-            const date = new Date();
-            $("#sysDate").html(date.toLocaleString('ko-kr'));
         });
         
     	
@@ -371,6 +495,8 @@
                 ny = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
                 console.log(nx);
                 console.log(ny);
+    	        weatherForecast(nx,ny);
+                
             } else {
                 rs['x'] = v1;
                 rs['y'] = v2;
