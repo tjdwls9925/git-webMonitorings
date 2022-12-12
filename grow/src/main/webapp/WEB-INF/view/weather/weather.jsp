@@ -560,21 +560,21 @@
                         }
                     }
                     
-                    if(vecValue < 45){
+                    if(vecValue <= 45){
                     	vecDirection = "ºÏ";
-                    }else if(vecValue < 90){
+                    }else if(vecValue <= 90){
                     	vecDirection = "ºÏµ¿";
-                    }else if(vecValue < 135){
+                    }else if(vecValue <= 135){
                     	vecDirection = "µ¿";
-                    }else if(vecValue < 180){
+                    }else if(vecValue <= 180){
                     	vecDirection = "³²µ¿";
-                    }else if(vecValue < 225){
+                    }else if(vecValue <= 225){
                     	vecDirection = "³²";
-                    }else if(vecValue < 270){
+                    }else if(vecValue <= 270){
                     	vecDirection = "³²¼­";
-                    }else if(vecValue < 315){
+                    }else if(vecValue <= 315){
                     	vecDirection = "¼­";
-                    }else if(vecValue < 360){
+                    }else if(vecValue <= 360){
                     	vecDirection = "ºÏ¼­";
                     }
                     

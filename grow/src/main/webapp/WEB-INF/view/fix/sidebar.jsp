@@ -49,8 +49,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">API Menu:</h6>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/weather/weather">Weather</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/cards">Cards</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/weather/weather">Weather API</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/map/map">KaKaoMap API</a>
                     </div>
                 </div>
             </li>
