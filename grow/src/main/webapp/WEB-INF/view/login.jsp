@@ -22,6 +22,8 @@
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="https://kit.fontawesome.com/db6222330e.js" crossorigin="anonymous"></script>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 </head>
 
@@ -63,6 +65,9 @@
                                         <button id=login_btn class="border_style btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
+                                        <button id=kakao_login_btn class="border_style btn btn-kakao btn-user btn-block" style="background-color : #C6B153; color:#fff">
+                                            <i class="fa-solid fa-comment" style="margin-right: 5px;"></i>Login with Kakao
+                                        </button>
                                         <hr>
                                         <button class="border_style btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -101,6 +106,28 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 	$(document).ready(function(){
+		
+		$("#kakao_login_btn").click(function(){
+			Kakao.init('8469ab96a33b36e55a1703bc288ba53d');
+			    Kakao.Auth.login({
+			      success: function (response) {
+			        Kakao.API.request({
+			          url: '/v2/user/me',
+			          success: function (response) {
+			        	  console.log(response)
+			          },
+			          fail: function (error) {
+			            console.log(error)
+			          },
+			        })
+			      },
+			      fail: function (error) {
+			        console.log(error)
+			      },
+			    })
+			  
+		});
+		
 		$("#login_btn").click(function(){
 			if($("#user_id").val() == "" || $("#user_pw").val() ==  ""){
 				swal.fire({
