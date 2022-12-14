@@ -133,6 +133,7 @@
 				swal.fire({
 					icon : "success",
 					title : "아이디와 비밀번호 모두 입력해주세요."
+					text : "hello"
 				})
 			}else{
 				$.ajax({
