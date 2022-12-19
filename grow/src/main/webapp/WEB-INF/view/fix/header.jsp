@@ -90,7 +90,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a id="profile_btn" class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -126,7 +126,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a id="profile_btn" class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -151,6 +151,19 @@
 					%>
 
                     </ul>
+	
+	
+	<script>
+		
+		
+			$(document).ready(function(){
+				$("#profile_btn").click(function(){
+					window.location.href="${pageContext.request.contextPath}/user/myProfile";
+				})
+			})
+		
+	
+	</script>
 	
 </body>
 </html>

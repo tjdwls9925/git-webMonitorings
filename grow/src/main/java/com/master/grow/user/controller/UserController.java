@@ -108,9 +108,7 @@ public class UserController {
 	            map.put("errorMsg", exception.getMessage());
 	        }
 		}
-		
-		
-		
+
 		return map;
 	}
 	
