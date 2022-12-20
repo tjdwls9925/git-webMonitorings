@@ -12,5 +12,8 @@ public interface UserMapper {
 
 	public int userLoginEvent(@Param("userId") String userId, @Param("userPw") String userPw);
 
+	public int newInsertUser(@Param("userCode") String userCode, @Param("userID") String userID, @Param("userName") String userName,@Param("userEmail") String userEmail, @Param("userPassword") String userPassword,
+			@Param("userPhone") String userPhone, @Param("userGender") String userGender, @Param("userBirth") String userBirth);
+
 
 }

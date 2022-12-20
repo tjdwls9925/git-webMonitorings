@@ -11,8 +11,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	public int InsertNewUser(@Param("userId") String userId, @Param("userName") String userName,@Param("userEmail") String userEmail, @Param("userPw")String userPw, @Param("userRePw")String userRePw) {
-		int result = userMapper.InsertNewUser(userId, userName, userEmail, userPw, userRePw);
+	public int newInsertUser(String userCode, String userID, String userName, String userEmail, String userPassword,
+			String userPhone, String userGender, String userBirth) {
+		int result = userMapper.newInsertUser(userCode,userID,userName,userEmail,userPassword,userPhone,userGender,userBirth);
 		return result;
 	}
 	

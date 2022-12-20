@@ -2,8 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.master.grow.user.mapper.UserMapper">
 
-<insert id="InsertNewUser">
-	insert into user_data (user_id , user_name , user_email , user_password , user_repeat_password) values(#{userId},#{userName},#{userEmail},#{userPw},#{userRePw})
+<insert id="newInsertUser">
+	insert into user_data(
+		code,
+		user_id,
+		user_name,
+		user_email,
+		user_password,
+		user_phone_number,
+		user_gender,
+		user_birth,
+		user_memberShip_id
+		) values(
+			#{userCode},
+			#{userID},
+			#{userName},
+			#{userEmail},
+			#{userPassword},
+			#{userPhone},
+			#{userGender},
+			#{userBirth},
+			"basic"
+		)
 </insert>
 
 <select id="SelectNewInsertUserIdCheck" resultType="int">

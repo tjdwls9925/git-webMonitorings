@@ -25,26 +25,49 @@ public class UserController {
 	public ModelMap InsertNewUser(HttpServletRequest request, HttpServletResponse response) {
 		
 		map = new ModelMap();
-		String userId = request.getParameter("userId");
+
+		String userCode = request.getParameter("userCode");
+		String userID = request.getParameter("userID");
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
-		String userPw = request.getParameter("userPw");
-		String userRePw = request.getParameter("userRePw");
-		System.out.println(userId);
+		String userPassword = request.getParameter("userPassword");
+		String userPhone = request.getParameter("userPhone");
+		String userGender = request.getParameter("userGender");
+		String userBirth = request.getParameter("userBirth");
 		
 		
-		int result = userService.InsertNewUser(userId,userName,userEmail,userPw,userRePw);
+		System.out.println(userCode);
 		
-		try {
-			map.put("result", result);
-            map.put("errorCode", 1);
-            map.put("errorMsg", "성공!");
+		
+		int result = userService.newInsertUser(userCode,userID,userName,userEmail,userPassword,userPhone,userGender,userBirth);
+		
+		
+		if(result ==1) {
+			try {
+				map.put("result",result);
+	            map.put("errorCode", 1);
+	            map.put("errorMsg", "성공!");
 
-        }catch(Exception exception){
-            exception.printStackTrace();
-            map.put("errorCode", -1);
-            map.put("errorMsg", exception.getMessage());
-        }
+	        }catch(Exception exception){
+	        	
+	            map.put("errorCode", -1);
+	            map.put("errorMsg", exception.getMessage());
+	            exception.printStackTrace();
+	        }
+		}else {
+			try {
+				map.put("result",0);
+	            map.put("errorCode", 1);
+	            map.put("errorMsg", "성공!");
+
+	        }catch(Exception exception){
+	            exception.printStackTrace();
+	            map.put("errorCode", -1);
+	            map.put("errorMsg", exception.getMessage());
+	        }
+		}
+		
+		
 		return map;
 	}
 	

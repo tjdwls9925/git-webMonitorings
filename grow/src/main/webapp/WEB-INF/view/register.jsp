@@ -93,12 +93,12 @@
 					<div class ="form-group row" style="text-align: center;">
                         <div class="btn-group col-xl-12 col-sm-6 mb-3 mb-sm-0" data-toggle="buttons">
                             <label class="btn active border-secondary" style="color:black; border-radius: 24px;">
-                                <input type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
+                                <input class="user_gender" type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
                             </label>
                             <label class="btn border-secondary" style="color:black; border-radius: 24px;">
-                                <input type="radio" name="userGender" autocomplete="off" value="여자">여자
+                                <input class="user_gender" type="radio" name="userGender" autocomplete="off" value="여자">여자
                             </label>
-                            </div>    
+                         </div>    
                     </div>
                     <div class="form-group row text-center">
                     				<div class="col-sm-3 mb-3 mb-sm-0">
@@ -172,6 +172,9 @@
 	<script>
 		$(document).ready(function() {
 				
+			
+			
+			
 			let code_check_msg = 0;
 			let id_check_msg = 0;			
 			
@@ -189,6 +192,9 @@
 			$("#select_year").html(year);
 			
 			for(let y = 1; y <=12; y++){
+				if(y < 10){
+					y = "0"+y
+				}
 				month += "<option>"
 				+ y
 				+ "</option>"
@@ -197,12 +203,18 @@
 			$("#select_month").html(month);
 			
 			for(let z = 1; z <=31; z++){
+				if(z < 10){
+					z = "0"+z;
+				}
 				day += "<option>"
 					+ z
 					+ "</option>"
 			}
 			
 			$("#select_day").html(day);
+			
+			console.log($("#select_year option:selected").val()+$("#select_month option:selected").val()+$("#select_day option:selected").val())
+
 			
 			$("#id_check_btn").click(function(){
 				$.ajax({
@@ -307,21 +319,22 @@
 												    dataType: "json",
 												    type: "POST",
 												    data : {
-												    	userId : $("#user_id").val(),
-												    	userName : $("#user_name").val(),
-												    	userEmail : $("#user_email").val(),
-												    	userPw : $("#user_password").val(),
-												    	userRePw : $("#user_repeat_password").val()
+														userCode : $("#user_code").val(),
+														userID : $("#user_id").val(),
+														userName : $("#user_name").val(),
+														userEmail : $("#user_email").val(),
+														userPassword : $("#user_password").val(),
+														userPhone : $("#user_phone_number").val(),
+														userGender : $("input:radio[name=userGender]:checked").val(),
+														userBirth : $("#select_year option:selected").val()+$("#select_month option:selected").val()+$("#select_day option:selected").val()
 												    },
 												    async: "false",
 												    success: function (data) {
 														console.log(data.result);
 														if(data.result == 1){
-															swal.fire({
-																icon : "success",
-																title : "회원가입이 완료되었습니다."
-															})
 															setTime();
+														}else{
+															alert("알 수 없는 오류.");
 														}
 												    }
 												}) 
