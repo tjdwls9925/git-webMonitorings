@@ -128,20 +128,16 @@
                                 aria-labelledby="userDropdown">
                                 <a id="profile_btn" class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    마이페이지
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <button id="farm_code_btn" class="dropdown-item">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                                    농장코드 등록
+                                </button>
                                 <div class="dropdown-divider"></div>
                                 <button id="logout_btn" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    로그아웃
                                 </button>
                             </div>
                         </li>
@@ -160,6 +156,12 @@
 				$("#profile_btn").click(function(){
 					window.location.href="${pageContext.request.contextPath}/user/myProfile";
 				})
+				
+				
+				$("#farm_code_btn").click(function(){
+					window.location.href="${pageContext.request.contextPath}/user/farmCode";
+				})
+				
 			})
 		
 	

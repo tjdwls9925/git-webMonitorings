@@ -99,26 +99,6 @@
 	<script>
 	$(document).ready(function(){
 		
-		$("#kakao_login_btn").click(function(){
-			Kakao.init('8469ab96a33b36e55a1703bc288ba53d');
-			    Kakao.Auth.login({
-			      success: function (response) {
-			        Kakao.API.request({
-			          url: '/v2/user/me',
-			          success: function (response) {
-			        	  console.log(response)
-			          },
-			          fail: function (error) {
-			            console.log(error)
-			          },
-			        })
-			      },
-			      fail: function (error) {
-			        console.log(error)
-			      },
-			    })
-			  
-		});
 		
 		$("#login_btn").click(function(){
 			if($("#user_id").val() == "" || $("#user_pw").val() ==  ""){
@@ -128,7 +108,7 @@
 				})
 			}else{
 				$.ajax({
-				    url: "${pageContext.request.contextPath}/user/userLoginEvent",
+				    url: "${pageContext.request.contextPath}/normalUser/userLoginEvent",
 				    dataType: "json",
 				    type: "GET",
 				    data : {
@@ -156,7 +136,7 @@
 		});
 		
 		function setTime() {
-	        setTimeout("location.href = '${pageContext.request.contextPath}/main'", 1000)
+	        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/webMain'", 1000)
 	    }
 	})
 	

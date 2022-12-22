@@ -12,6 +12,7 @@
 
 <insert id="newInsertUser">
 	insert into normal_user_data(
+		code,
 		user_id,
 		user_name,
 		user_email,
@@ -21,6 +22,7 @@
 		user_birth,
 		user_memberShip_id
 		) values(
+			null,
 			#{userID},
 			#{userName},
 			#{userEmail},
@@ -31,6 +33,46 @@
 			"basic"
 		)
 </insert>
+
+
+<select id="userLoginEvent" resultType="int">
+	select count(*)
+	from normal_user_data
+	where user_id = #{userId}
+	and user_password = #{userPw}
+</select>
+
+<select id="getSelectedUser" resultMap="getSelectedUserMap">
+
+	select * from normal_user_data
+	where user_id = #{userID}
+	
+</select>
+
+<resultMap type="com.master.grow.user.to.UserTO" id="getSelectedUserMap">
+	<result property="code" column="code"></result>
+	<result property="userID" column="user_id"></result>
+	<result property="userName" column="user_name"></result>
+	<result property="userEmail" column="user_email"></result>
+	<result property="userPassword" column="user_password"></result>
+	<result property="userPhone" column="user_phone_number"></result>
+	<result property="userGender" column="user_gender"></result>
+	<result property="userBirth" column="user_birth"></result>
+	<result property="userMembership" column="user_memberShip_id"></result>
+	<result property="userSignupDate" column="user_signUp_date"></result>
+</resultMap>
+
+
+<select id="getFarmCode" resultType="int">
+		select count(*) from farm_data
+		where code = #{farmCode}
+</select> 
+
+<update id="userFarmCodeUpdate">
+	update normal_user_data set code = #{code}
+	where user_id = #{userID}
+</update>
+
 
 
 </mapper>

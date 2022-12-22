@@ -22,42 +22,16 @@
 </ul>
 
 <script>
-Kakao.init('8469ab96a33b36e55a1703bc288ba53d'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+
+		let code = "12345678901234567890";
+		let code2 = BigInt("12345678901234567890");
+
+		console.log("String",code)
+		console.log(BigInt("12345678901234567890"))
+		console.log(BigInt("12345678901234567890") + BigInt("12345678901234567890"))
+		
+		
+		
 </script>
 
 </body>
