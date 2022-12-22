@@ -18,4 +18,11 @@ public class NormalUserServiceImpl implements NormalUserService{
 		return result;
 	}
 	
+	
+	public int newInsertUser(String userID, String userName, String userEmail, String userPassword, String userPhone,
+			String userGender, String userBirth) {
+		int result = normalUserMapper.newInsertUser(userID,userName,userEmail,userPassword,userPhone,userGender,userBirth);
+		return result;
+	}
+	
 }

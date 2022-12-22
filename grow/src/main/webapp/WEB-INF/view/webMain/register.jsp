@@ -96,13 +96,13 @@
                     </div>
                     <div class="form-group row text-center">
 									<div class="col-sm-4 mb-3 mb-sm-0">
-										<input type="text" class="form-control form-control-user text-center rounded-pill border-secondary" placeholder="출생년도"> 
+										<input id="input_year" type="text" class="form-control form-control-user text-center rounded-pill border-secondary" placeholder="출생년도"> 
 									</div>
 									<div class="col-sm-4 mb-3 mb-sm-0">
-										<input type="text" class="form-control form-control-user text-center rounded-pill border-secondary" placeholder="월">
+										<input  id="input_month" type="text" class="form-control form-control-user text-center rounded-pill border-secondary" placeholder="월">
 									</div>
 									<div class="col-sm-4 mb-3 mb-sm-0">
-										<input type="text" class="form-control form-control-user text-center rounded-pill border-secondary" placeholder="일">
+										<input  id="input_day" type="text" class="form-control form-control-user text-center rounded-pill border-secondary" placeholder="일">
 									</div>
 								</div>
 								<div class="form-group row text-center">
@@ -151,6 +151,8 @@
 			$(document).ready(function(){
 						
 				
+				let id_check_msg = 0;	
+				
 				$("#id_check_btn").click(function(){
 					$.ajax({
 					    url: "${pageContext.request.contextPath}/normalUser/SelectNewInsertUserIdCheck",
@@ -184,6 +186,96 @@
 					})
 				});
 				
+				
+				$("#register_btn").click(function(){
+					if( 	$("#user_id").val() == "" || $("#user_name").val() == "" ||
+							$("#user_email").val() == "" || $("#user_password").val() == "" ||
+							$("#user_repeat_password").val() == ""	||
+							$("#user_phone_number").val() == "" || $("#input_year").val() == "" ||
+							$("#input_month").val() == "" || $("#input_day").val() == ""
+						){
+						Swal.fire({
+							icon : "info",
+							title : "모든 입력란을 작성해주세요.",
+						})
+					}else{
+						if($("#user_password").val() != $("#user_repeat_password").val()){
+							Swal.fire({
+								icon : "error",
+								title : "비밀번호가 일치하지 않습니다.",
+							})
+						}else{
+							if(id_check_msg != 1){
+								Swal.fire({
+									icon : "info",
+									title : "아이디 중복확인부탁드립니다.",
+								})	
+							}else{
+								Swal.fire({
+									  title: '입력하신 정보로 회원가입하시겠습니까?',
+									  icon: 'info',
+									  showCancelButton: true,
+									  confirmButtonColor: '#3085d6',
+									  cancelButtonColor: '#d33',
+									  confirmButtonText: '가입하기',
+									  cancelButtonText: '취소'
+									}).then((result) => {
+										  if (result.isConfirmed) {
+											  let month = "";
+											  let day = "";
+											  
+											  if($("#input_month").val().length == 1){
+												  if($("#input_month").val() < 10){
+													  month = "0"+$("#input_month").val();
+													  console.log(month)
+												  }
+											  }
+											  
+											  if($("#input_day").val().length == 1){
+												  if($("#input_day").val() < 10){
+													  day = "0"+$("#input_day").val();
+													  console.log(day)
+												  }
+											  }
+											  
+											  
+											  
+												 $.ajax({
+													    url: "${pageContext.request.contextPath}/normalUser/InsertNewUser",
+													    dataType: "json",
+													    type: "POST",
+													    data : {
+															userID : $("#user_id").val(),
+															userName : $("#user_name").val(),
+															userEmail : $("#user_email").val(),
+															userPassword : $("#user_password").val(),
+															userPhone : $("#user_phone_number").val(),
+															userGender : $("input:radio[name=userGender]:checked").val(),
+															userBirth : $("#input_year").val()+""+month+""+day
+													    },
+													    async: "false",
+													    success: function (data) {
+															console.log(data.result);
+															if(data.result == 1){
+																setTime();
+															}else{
+																alert("알 수 없는 오류.");
+															}
+													    }
+													}) 
+										  		}
+											})
+							}
+						}
+					}
+					
+					
+					
+				})
+				
+				function setTime() {
+		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/webMain'", 1000)
+		    }
 				
 			});
 		

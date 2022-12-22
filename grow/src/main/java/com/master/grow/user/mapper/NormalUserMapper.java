@@ -8,4 +8,7 @@ public interface NormalUserMapper {
 
 	public int SelectNewInsertUserIdCheck(@Param("userID") String userID);
 
+	public int newInsertUser(@Param("userID") String userID, @Param("userName") String userName,@Param("userEmail") String userEmail, @Param("userPassword") String userPassword,
+			@Param("userPhone") String userPhone, @Param("userGender") String userGender, @Param("userBirth") String userBirth);
+
 }
