@@ -105,6 +105,7 @@
     	 let lat;
     	 let lon;
     	 
+    	 
     	
     	 askForCoords();
     	 
