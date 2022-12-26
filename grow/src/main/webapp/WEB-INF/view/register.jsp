@@ -217,6 +217,14 @@
 
 			
 			$("#id_check_btn").click(function(){
+				
+				if($("#user_id").val() == ""){
+					Swal.fire({
+						icon : "info",
+						title : "아이디를 입력해 주세요.",
+					})
+				}
+				
 				$.ajax({
 				    url: "${pageContext.request.contextPath}/user/SelectNewInsertUserIdCheck",
 				    dataType: "json",

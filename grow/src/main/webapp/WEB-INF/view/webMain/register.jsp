@@ -149,41 +149,57 @@
 	<script>
 	
 			$(document).ready(function(){
+				
+				
+				
+				$("#refresh_btn").click(function(){
+					window.location.href="${pageContext.request.contextPath}/webMain/register";
+				})
+					
+				
 						
 				
 				let id_check_msg = 0;	
 				
 				$("#id_check_btn").click(function(){
-					$.ajax({
-					    url: "${pageContext.request.contextPath}/normalUser/SelectNewInsertUserIdCheck",
-					    dataType: "json",
-					    type: "GET",
-					    data : {
-					    	userID : $("#user_id").val()
-					    },
-					    async: "false",
-					    success: function (data) {
-					    	console.log(data.result)
-					    	
-							if(data.result != 1){
-								Swal.fire({
-									icon : "success",
-									title : "사용가능한ID",
-								})
-								id_check_msg = 1;
-								
-								$("#user_id").attr("readonly",true);
-								
-							}else{
-								Swal.fire({
-									icon : "error",
-									title : "이미존재하는ID",
-								})
-							}
-					    	
-					    	
-					    }
-					})
+					
+					if($("#user_id").val() == ""){
+						Swal.fire({
+							icon : "info",
+							title : "아이디를 입력해 주세요.",
+						})
+					}else{
+						$.ajax({
+						    url: "${pageContext.request.contextPath}/normalUser/SelectNewInsertUserIdCheck",
+						    dataType: "json",
+						    type: "GET",
+						    data : {
+						    	userID : $("#user_id").val()
+						    },
+						    async: "false",
+						    success: function (data) {
+						    	console.log(data.result)
+						    	
+								if(data.result != 1){
+									Swal.fire({
+										icon : "success",
+										title : "사용가능한ID",
+									})
+									id_check_msg = 1;
+									
+									$("#user_id").attr("readonly",true);
+									
+								}else{
+									Swal.fire({
+										icon : "error",
+										title : "이미존재하는ID",
+									})
+								}
+						    }
+						})
+					}
+					
+					
 				});
 				
 				
