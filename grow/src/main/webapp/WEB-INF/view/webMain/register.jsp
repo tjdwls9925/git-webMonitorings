@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Register</title>
+<title>SB Admin 2 - Registesr</title>
 
 <!-- Custom fonts for this template-->
 <link
