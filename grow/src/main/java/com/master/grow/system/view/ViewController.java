@@ -26,4 +26,6 @@ public class ViewController {
         System.out.println("경로 : "+folder+" "+" 요청 VIEW : "+viewName);
         return folder+"/"+viewName;
     }
+    
+    
 }

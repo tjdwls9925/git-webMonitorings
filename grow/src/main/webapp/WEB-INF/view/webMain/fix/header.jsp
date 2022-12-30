@@ -31,11 +31,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">멤버쉽</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">제품소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-                        <li class="nav-item"><a class="nav-link">오시는 길</a></li>
+                        <li id="board_btn" class="nav-item"><a class="nav-link">자유게시판</a></li>
+                        <li id="membership_btn" class="nav-item"><a class="nav-link">멤버쉽</a></li>
+                        <li id="product_btn" class="nav-item"><a class="nav-link">제품소개</a></li>
+                        <li id="support_btn" class="nav-item"><a class="nav-link">문의하기</a></li>
+                        <li id="waytocom_btn" class="nav-item"><a class="nav-link">오시는 길</a></li>
                         <li id="login_btn" class="nav-item"><a class="nav-link" href="#" style="color:#4079BF;">로그인</a></li>
                     </ul>
                 </div>
@@ -56,11 +56,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">멤버쉽</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">제품소개</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">문의하기</a></li>
-                        <li class="nav-item"><a class="nav-link">오시는 길</a></li>
+                        <li id="board_btn" class="nav-item"><a class="nav-link">자유게시판</a></li>
+                        <li id="membership_btn" class="nav-item"><a class="nav-link">멤버쉽</a></li>
+                        <li id="product_btn" class="nav-item"><a class="nav-link">제품소개</a></li>
+                        <li id="support_btn" class="nav-item"><a class="nav-link">문의하기</a></li>
+                        <li id="waytocom_btn" class="nav-item"><a class="nav-link">오시는 길</a></li>
                         <li id="logout_btn" class="nav-item"><a class="nav-link" href="#" style="color:#4079BF;">로그아웃</a></li>
                         <li id="pageMove" class="nav-item"><a class="nav-link" href="#" style="color:#4079BF;">내 농장확인</a></li>
                     </ul>
@@ -76,6 +76,29 @@
             
          <script>
         	$(document).ready(function(){
+       
+        		
+        		$("#waytocom_btn").click(function(){
+        			window.location.href="${pageContext.request.contextPath}/webMain/waytocom";
+        		});
+        		
+        		$("#support_btn").click(function(){
+        			window.location.href="${pageContext.request.contextPath}/webMain/support";
+        		});
+        		
+        		$("#product_btn").click(function(){
+        			window.location.href="${pageContext.request.contextPath}/webMain/product";
+        		});
+        		
+        		$("#membership_btn").click(function(){
+        			window.location.href="${pageContext.request.contextPath}/webMain/membership";
+        		});
+        		
+        		$("#board_btn").click(function(){
+        			window.location.href="${pageContext.request.contextPath}/webMain/freeBoard";
+        		});
+        		
+        		
         		$("#login_btn").click(function(){
         			window.location.href="${pageContext.request.contextPath}/webMain/login";
         		});
