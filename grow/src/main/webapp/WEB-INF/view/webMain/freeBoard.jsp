@@ -1,12 +1,184 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-	자유게시판
-</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agency - Start Bootstrap Theme</title>
+        
+        <style>
+        
+        	div ul li{
+        		margin-left: 5px;
+        		margin-light:5px;
+        	}
+        	div ul li a{
+        		color : #0B0504;
+        		text-decoration: none;
+        		font-size: 20px;
+        	}
+        
+        table tbody tr td a{
+        	color: black;
+        	text-decoration: none;
+        }
+        
+        </style>
+        
+        
+        
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/webMain/assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="${pageContext.request.contextPath}/resources/webMain/css/styles.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>        
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+            	<%@ include file="./fix/header.jsp" %>
+        </nav>
+        <!-- Masthead-->
+        
+        <div class="container">
+        	<table class="table table-hover text-center">
+        		<thead>
+        			<tr>
+        				<th>번호</th>
+        				<th>제목</th>
+        				<th>작성자</th>
+        				<th>날짜</th>
+        				<th>조회수</th>        			
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr>
+        				<td>1</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>2</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>3</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>4</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>5</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>6</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>7</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>8</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>9</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        			<tr>
+        				<td>10</td>
+        				<td><a href="#">안녕하세요</a></td>
+        				<td>헬로</td>
+        				<td>2023.01.03</td>
+        				<td>3</td>
+        			</tr>
+        		</tbody>
+        	</table>
+        	
+        	<hr/>
+        		<a id="write_btn" class="btn btn-primary" style="float:right;">글쓰기</a>
+
+        	
+        	<div class="d-flex justify-content-center">      	
+        		<ul class="pagination">
+        			<li><a href="#">1</a></li>
+        			<li><a href="#">2</a></li>
+        			<li><a href="#">3</a></li>
+        			<li><a href="#">4</a></li>
+        			<li><a href="#">5</a></li>
+        		</ul>
+        	</div>
+        </div>
+       
+        
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <%@ include file="./fix/footer.jsp" %>
+        </footer>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+        	$(document).ready(function(){
+        		
+        		function setTime() {
+    		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/login'", 1000)
+    		    }
+        		
+        		$("#write_btn").click(function(){
+                	const user = "<%=user%>";
+            		
+                	if(user == "GUEST"){
+                		swal.fire({
+                			icon : "info",
+                			title : "로그인 후 이용가능."
+                		})
+                		setTime();
+                	}else{
+                		window.location.href="${pageContext.request.contextPath}/webMain/freeBoardWrite?id="+user;
+                	}
+        		})
+        	})
+        </script>
+        
+    </body>
 </html>
