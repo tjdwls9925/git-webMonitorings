@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.master.grow.board.mapper.BoardMapper">
+
+	<insert id="InsertBoardWrite" >
+			call board_insert(
+				#{userID},#{title},#{content}
+			)
+	</insert>
+
+	<select id="getSelectAllBoardList" resultMap="getSelectAllBoardListMap">
+	
+		select board_seq , user_id , board_title , board_content , 
+		substring(board_writer_date,1,19) AS "board_writer_date" , 
+		board_update_date , board_views_count , board_attachments
+		from free_board order by board_seq desc limit #{pageNum} , 10
+	
+	</select>
+	
+	<resultMap type="com.master.grow.board.to.boardTO" id="getSelectAllBoardListMap">
+		<result property="boardSeq" column="board_seq"></result>
+		<result property="userID" column="user_id"></result>
+		<result property="boardTitle" column="board_title"></result>
+		<result property="boardContent" column="board_content"></result>
+		<result property="boardWriterDate" column="board_writer_date"></result>
+		<result property="boardUpdateDate" column="board_update_date"></result>
+		<result property="boardViewsCount" column="board_views_count"></result>
+		<result property="boardAttachments" column="board_attachments"></result>
+	</resultMap>
+	
+	<select id="getSelectBoardDetailContent" resultMap="getSelectAllBoardListMap">
+		select board_seq , user_id , board_title , board_content , 
+		substring(board_writer_date,1,19) AS "board_writer_date" , 
+		substring(board_update_date,1,19) AS "board_update_date",
+		board_views_count , board_attachments
+		from free_board where board_seq = #{boardSeq}
+	</select>
+	
+	<update id="UpdateBoardContent">
+		update free_board set board_title = #{title} , board_content = #{content} , board_update_date = now()
+		where board_seq = #{boardSeq}
+		and user_id = #{userID}
+	</update>
+	
+	
+	<delete id="DeleteBoardContent">
+		call board_delete (
+			#{boardSeq} , #{userID} 
+		)
+	</delete>
+	
+	<update id="UserViewsCount">
+	
+		update free_board set board_views_count = board_views_count + #{count} 
+		where board_seq = #{boardSeq}
+	
+	</update>
+	
+
+</mapper>

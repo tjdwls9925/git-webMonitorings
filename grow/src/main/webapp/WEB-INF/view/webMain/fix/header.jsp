@@ -95,7 +95,10 @@
         		});
         		
         		$("#board_btn").click(function(){
+        			
         			window.location.href="${pageContext.request.contextPath}/webMain/freeBoard";
+
+        			
         		});
         		
         		

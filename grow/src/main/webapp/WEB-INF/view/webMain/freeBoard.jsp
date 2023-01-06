@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR"%>  
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,10 +11,6 @@
         
         <style>
         
-        	div ul li{
-        		margin-left: 5px;
-        		margin-light:5px;
-        	}
         	div ul li a{
         		color : #0B0504;
         		text-decoration: none;
@@ -23,6 +19,10 @@
         
         table tbody tr td a{
         	color: black;
+        	text-decoration: none;
+        }
+        
+        .paging a{
         	text-decoration: none;
         }
         
@@ -40,7 +40,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="${pageContext.request.contextPath}/resources/webMain/css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>        
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+              
     </head>
     <body>
         <!-- Navigation-->
@@ -60,7 +61,7 @@
         				<th>조회수</th>        			
         			</tr>
         		</thead>
-        		<tbody>
+        		<tbody id="tbody_box">
         			<tr>
         				<td>1</td>
         				<td><a href="#">안녕하세요</a></td>
@@ -133,32 +134,114 @@
         			</tr>
         		</tbody>
         	</table>
-        	
-        	<hr/>
-        		<a id="write_btn" class="btn btn-primary" style="float:right;">글쓰기</a>
+        
 
         	
-        	<div class="d-flex justify-content-center">      	
-        		<ul class="pagination">
-        			<li><a href="#">1</a></li>
-        			<li><a href="#">2</a></li>
-        			<li><a href="#">3</a></li>
-        			<li><a href="#">4</a></li>
-        			<li><a href="#">5</a></li>
-        		</ul>
-        	</div>
+        	<nav aria-label="Page navigation example" class="mt-4">
+        	  
+				<ul class="pagination justify-content-center">
+				    <li class="page-item">
+ 						<a id="prev_btn" class="page-link" class="page-link" href="#">Previous</a>  
+				    </li>
+				    <li id="pageNum" class="page-item"><a class="page-link" href="#">1</a></li>
+				    <li class="page-item">
+				      <a id="next_btn" class="page-link" href="#">다음</a>
+				    </li>
+				  </ul>
+        	
+        	<a id="write_btn" class="btn btn-primary float-end">글쓰기</a>
+  				   
+  				
+			</nav>
+			
+        			
         </div>
        
-        
-        <!-- Footer-->
-        <footer class="footer py-4">
-            <%@ include file="./fix/footer.jsp" %>
-        </footer>
+       
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         
         <script>
+	    
+        
+        
         	$(document).ready(function(){
+        		
+        		let LastPageNum = 0;
+        		
+        		let pageCount = 1;
+		    	
+		    	$("#pageNum").html('<a class="page-link" href="#">' + pageCount + '</a>')
+		    	
+		    	$("#prev_btn").hide();
+		    	
+				
+		    	
+		    	
+		    	$("#next_btn").click(function(){
+		    		
+		    		
+		    		
+					
+					pageCount = pageCount+1;
+					
+					$("#pageNum").html('<a class="page-link" href="#">' + pageCount + '</a>');
+					
+					$("#prev_btn").show();
+					
+					pageRequest(pageCount);
+					
+					
+					
+	
+				})
+				
+				
+				$("#prev_btn").click(function(){
+					pageCount = pageCount-1;
+					$("#pageNum").html('<a class="page-link" href="#">' + pageCount + '</a>');
+					pageRequest(pageCount);
+					$("#next_btn").show();
+					
+					if(pageCount == 1){
+						swal.fire({
+							icon : "info",
+							title : "첫 페이지입니다."
+						})
+						$("#prev_btn").hide();
+					
+					}
+
+					
+				})
+				
+
+        		$.ajax({
+				    url: "${pageContext.request.contextPath}/board/SelectBoardContent",
+				    dataType: "json",
+				    type: "GET",
+				    data : {
+				    	pageCount : (pageCount - 1) * 10 
+				    },
+				    async: "false",
+				    success: function (data) {
+				    	
+				    	console.log(data.boardList.length);
+				    	let str = "";
+						for(let x = 0; x < data.boardList.length; x++){
+							str+= "<tr onclick='callBoardDetail("+data.boardList[x].boardSeq+")' style='cursor:pointer'>"
+								+ "<td>" + data.boardList[x].boardSeq + "</td>"
+								+ "<td>" + data.boardList[x].boardTitle + "</td>"
+								+ "<td>" + data.boardList[x].userID + "</td>"
+								+ "<td>" + data.boardList[x].boardWriterDate + "</td>"
+								+ "<td>" + data.boardList[x].boardViewsCount + "</td>"
+								+ "</tr>"
+						}
+				    	
+				    	$("#tbody_box").html(str);
+				    	
+				    }
+				})
         		
         		function setTime() {
     		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/login'", 1000)
@@ -178,6 +261,94 @@
                 	}
         		})
         	})
+        	
+        	function callBoardDetail(boardSeq){
+        		
+        		$.ajax({
+				    url: "${pageContext.request.contextPath}/board/UserViewsCount",
+				    dataType: "json",
+				    type: "PUT",
+				    data : {
+				    	boardSeq : boardSeq
+				    },
+				    async: "false",
+				    success: function (data) {
+				    	window.location.href="${pageContext.request.contextPath}/webMain/boardDetail?boardSeq=" + boardSeq;
+				    }
+				})
+
+		    	}
+        	
+        	
+        	function pageRequest(pageNum){
+        		$.ajax({
+				    url: "${pageContext.request.contextPath}/board/SelectBoardContent",
+				    dataType: "json",
+				    type: "GET",
+				    data : {
+				    	pageCount : (pageNum - 1) * 10 
+				    },
+				    async: "false",
+				    success: function (data) {
+				    	
+				    	console.log('글 갯수' ,data.boardList.length)
+				    	
+				    	let str = "";
+						for(let x = 0; x < data.boardList.length; x++){
+							str+= "<tr onclick='callBoardDetail("+data.boardList[x].boardSeq+")' style='cursor:pointer'>"
+							+ "<td>" + data.boardList[x].boardSeq + "</td>"
+							+ "<td>" + data.boardList[x].boardTitle + "</td>"
+							+ "<td>" + data.boardList[x].userID + "</td>"
+							+ "<td>" + data.boardList[x].boardWriterDate + "</td>"
+							+ "<td>" + data.boardList[x].boardViewsCount + "</td>"
+							+ "</tr>"
+						}
+				    	
+				    	$("#tbody_box").html(str);
+				  
+				    	if(data.boardList.length < 10){
+				    		swal.fire({
+				    			icon:	"info",
+				    			title : "마지막페이지"
+				    		})
+				    		$("#next_btn").hide();
+				    	}else{
+					    	if(data.boardList.length = 10){
+					    		$.ajax({
+								    url: "${pageContext.request.contextPath}/board/SelectBoardContent",
+								    dataType: "json",
+								    type: "GET",
+								    data : {
+								    	pageCount : (pageNum) * 10 
+								    },
+								    async: "false",
+								    success: function (data) {
+								    	
+								    	console.log('다음페이지 글 갯수' ,data.boardList.length)
+								    	
+								    	if(data.boardList.length == 0){
+								    		swal.fire({
+								    			icon:	"info",
+								    			title : "마지막페이지"
+								    		})
+								    		$("#next_btn").hide();
+								    	}
+										
+								    }
+								})
+					    	}
+				    	}
+				    	
+				    	
+				    	
+
+				    	
+				    }
+				})
+        	}
+        	
+       
+        	
         </script>
         
     </body>

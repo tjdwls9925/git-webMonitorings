@@ -41,6 +41,7 @@
         <link href="${pageContext.request.contextPath}/resources/webMain/css/styles.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
     </head>
     <body>
         <!-- Navigation-->
@@ -105,16 +106,73 @@
         <script>
         	$(document).ready(function(){
         		
+        		
+        		
+        		
+        		const user = "<%=user%>";
+        		
+        		$("#reg_id").val(user);
+        		
 	
         		$("#insert_board_btn").click(function(){
         			
+        			
+        	
+        			if($("#title").val() == "" || $("#content").val() == ""){
+        				swal.fire({
+        					icon : "info",
+        					title : "입력란을 다 작성해주세요."
+        				})
+        				
+        			}else{
+						Swal.fire({
+							  title: '입력하신 정보로 글을 등록하시겠습니까?',
+							  icon: 'info',
+							  showCancelButton: true,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '등록하기',
+							  cancelButtonText: '취소'
+							}).then((result) => {
+								  if (result.isConfirmed) {
+
+					        			$.ajax({
+										    url: "${pageContext.request.contextPath}/board/InsertBoardWrite",
+										    dataType: "json",
+										    type: "POST",
+										    data : {
+												userID : $("#reg_id").val(),
+										    	title : $("#title").val(),
+										    	content : $("#content").val()
+										    },
+										    async: "false",
+										    success: function (data) {
+										    	if(data.msgCode == 1){
+										    		swal.fire({
+										    			icon : "success",
+										    			title : "등록이 완료되었습니다."
+										    		})
+										    		setTime();
+										    	}else{
+										    		swal.fire({
+										    			icon : "error",
+										    			title : "알 수 없는 오류."
+										    		})
+										    	}
+										    }
+										})
+											    }
+											}) 
+								  		}
+									})
         		})
         		
         		
-        		$("#write_btn").click(function(){
-        			window.location.href="${pageContext.request.contextPath}/webMain/freeBoardWrite"
-        		})
-        	})
+
+        		function setTime() {
+		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/freeBoard'", 1000)
+		    	}
+
         	
         	
         	
