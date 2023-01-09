@@ -86,16 +86,15 @@
 
 				<div class="mb-3 d-flex align-items-center">
 
-					<label for="tag">첨부파일</label>
+					<label for="file-element">첨부파일</label>
 
-					
-					<i class="fa-solid fa-paperclip" style="margin-left: 10px; cursor: pointer;"></i>
-					<span style="margin-left: 10px;">파일명</span>
+					<input type="file" name="file" id="file-element" multiple>
 				</div>
 				
 			<div style="float:right; margin-bottom: 10px;">	
 			<a class="btn btn-primary" onclick="history.back()"  href="#">뒤로가기</a>
 			<a id="insert_board_btn" class="btn btn-primary " href="#">등록하기</a>
+			<button id="check_img">이미지 확인</button>
 			</div>
 			</div>
        
@@ -104,6 +103,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         
         <script>
+        
+        
+        
         	$(document).ready(function(){
         		
         		

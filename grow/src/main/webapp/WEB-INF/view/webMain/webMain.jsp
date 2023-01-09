@@ -50,7 +50,7 @@
                     <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                            <i class="fa-solid fa-camera fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">M-LINK</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
@@ -90,7 +90,7 @@
         <section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">역사</h2>
+                    <h2 class="section-heading text-uppercase">연혁</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <ul class="timeline">
@@ -98,40 +98,55 @@
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="${pageContext.request.contextPath}/resources/webMain/assets/img/about/1.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
+                                <h4>2018</h4>
+                                <h6 class="subheading">주식회사 따솜 설립-농업용 보온재 판매업</h6>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">공백</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="${pageContext.request.contextPath}/resources/webMain/assets/img/about/2.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>March 2011</h4>
-                                <h4 class="subheading">An Agency is Born</h4>
+                                <h4>2019</h4>
+                                <h6 class="subheading">중소벤처기업 - 여성기업인증</h6>
+                                <h6 class="subheading">시민일보 등재 - 스마트팜 장비로 아이스플랜트 재배</h6>
+                                <h6 class="subheading">서울와이어 등재 - 지능형 스마트팜 장비</h4>
+                                <h6 class="subheading">주식회사 마스터벨그로우 사명 변경 - 시스템 소프트웨어 업종</h6>
+                                <h6 class="subheading">Innogreen(벨기에 농업 컨설팅 그룹) 업무협약 - 기술자문 & 해외 영업 파트너</h6>
+                                <h6 class="subheading">한국산업기술진흥협회 - 기업부설연구소 인증 및 설립</h6>
+                                <h6 class="subheading">써브스트라투스코리아(국내 농업 컨설팅 그룹) 업무협약 - 기술자문&국내 영업 파트너</h6>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            <div class="timeline-body"><p class="text-muted">공백</p></div>
                         </div>
                     </li>
                     <li>
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="${pageContext.request.contextPath}/resources/webMain/assets/img/about/3.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>December 2015</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
+                                <h4>2020 ~ 2021</h4>
+                                <h6 class="subheading">CH20 프로그램 개발 완료</h6>
+                                <h6 class="subheading">인체용 발열감지 시스템(CH20-S) 개발완료</h6>
+                                <h6 class="subheading">돈사용 화재감시 시스템 개발완료 / CH20특허 출원</h6>
+                                <h6 class="subheading">농업용 함수율 측정장치 개발완료</h6>
+                                <h6 class="subheading">CH20 단동형 간편 스마트팜 개발 착수</h6>
+                                <h6 class="subheading">CH20 클라우드형 스마트팜 플랫폼 구축(24년 개발 완료 예정)</h6>
+                                <h6 class="subheading">온실 내/외부 환경 측정 프로그램 개발 완료</h6>
+                                <h6 class="subheading">스마트 수조 내외부 환경 모니터링 및 제어 시스템 개발 착수</h6>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+							<div class="timeline-body"><p class="text-muted">공백</p></div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image"><img class="rounded-circle img-fluid" src="${pageContext.request.contextPath}/resources/webMain/assets/img/about/4.jpg" alt="..." /></div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>July 2020</h4>
-                                <h4 class="subheading">Phase Two Expansion</h4>
+                                <h4>2022</h4>
+                                <h6 class="subheading">단동형 온실 환경제어기 개발 완료</h6>
+                                <h6 class="subheading">미기상 환경 센서 클라우드 서비스 개시</h6>
+                                <h6 class="subheading">삼양옵틱스 업무협약(MOU)체결</h6>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+							<div class="timeline-body"><p class="text-muted">공백</p></div>	
                         </div>
                     </li>
                     <li class="timeline-inverted">

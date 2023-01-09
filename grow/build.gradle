@@ -29,6 +29,7 @@ dependencies {
 	implementation 'javax.servlet:jstl'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
 
 }
 

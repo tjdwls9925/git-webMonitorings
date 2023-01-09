@@ -1,38 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-</head>
-<body>
-<ul>
-	<li onclick="kakaoLogin();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그인</span>
-      </a>
-	</li>
-	<li onclick="kakaoLogout();">
-      <a href="javascript:void(0)">
-          <span>카카오 로그아웃</span>
-      </a>
-	</li>
-</ul>
-
-<script>
-
-		let code = "12345678901234567890";
-		let code2 = BigInt("12345678901234567890");
-
-		console.log("String",code)
-		console.log(BigInt("12345678901234567890"))
-		console.log(BigInt("12345678901234567890") + BigInt("12345678901234567890"))
-		
-		
-		
-</script>
-
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>게시판 - 글쓰기</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <header th:insert="common/header.html"></header>
+    <div class="container">
+      <form action="/post" method="post" enctype="multipart/form-data">
+        <div class="form-group row">
+          <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
+          <div class="col-sm-10">
+            <input type="text" name="title" class="form-control" id="inputTitle" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputAuthor" class="col-sm-2 col-form-label"><strong>작성자</strong></label>
+          <div class="col-sm-10">
+            <input type="text" name="author" class="form-control" id="inputAuthor" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
+          <div class="col-sm-10">
+            <textarea type="text" name="content" class="form-control" id="inputContent"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputFile" class="col-sm-2 col-form-label"><strong>첨부 파일</strong></label>
+          <div class="col-sm-10">
+            <div class="custom-file" id="inputFile">
+              <input name="file" type="file" class="custom-file-input" id="customFile" />
+              <label class="custom-file-label" for="customFile">파일을 선택해 주세요.</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-auto mr-auto"></div>
+          <div class="col-auto">
+            <input class="btn btn-primary" type="submit" role="button" value="글쓰기" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+      $('.custom-file-input').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+      });
+    </script>
+  </body>
 </html>

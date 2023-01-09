@@ -239,13 +239,13 @@
 						}
 				    	
 				    	$("#tbody_box").html(str);
+				    	pageRequest(pageCount);
 				    	
 				    }
-				})
+				}),
+				
         		
-        		function setTime() {
-    		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/login'", 1000)
-    		    }
+
         		
         		$("#write_btn").click(function(){
                 	const user = "<%=user%>";
@@ -261,6 +261,11 @@
                 	}
         		})
         	})
+        	
+        	
+        	function setTime() {
+    		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/login'", 1000)
+    		}
         	
         	function callBoardDetail(boardSeq){
         		
@@ -307,10 +312,6 @@
 				    	$("#tbody_box").html(str);
 				  
 				    	if(data.boardList.length < 10){
-				    		swal.fire({
-				    			icon:	"info",
-				    			title : "마지막페이지"
-				    		})
 				    		$("#next_btn").hide();
 				    	}else{
 					    	if(data.boardList.length = 10){
@@ -327,10 +328,7 @@
 								    	console.log('다음페이지 글 갯수' ,data.boardList.length)
 								    	
 								    	if(data.boardList.length == 0){
-								    		swal.fire({
-								    			icon:	"info",
-								    			title : "마지막페이지"
-								    		})
+								    		
 								    		$("#next_btn").hide();
 								    	}
 										
