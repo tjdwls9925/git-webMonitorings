@@ -86,9 +86,11 @@
 
 				<div class="mb-3 d-flex align-items-center">
 
-					<label for="file-element">첨부파일</label>
-
-					<input type="file" name="file" id="file-element" multiple>
+		<form id="frm" name="frm" method="post" action="/board/insertBoard.do" enctype="multipart/form-data">
+			...
+			<input type="file" id="files" name="files" multiple="multiple">
+			<input type="submit" id="submit" value="저장" class="btn">
+		</form>
 				</div>
 				
 			<div style="float:right; margin-bottom: 10px;">	

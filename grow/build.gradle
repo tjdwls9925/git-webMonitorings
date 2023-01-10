@@ -9,6 +9,11 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+	all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+
+
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -29,7 +34,7 @@ dependencies {
 	implementation 'javax.servlet:jstl'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
-	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 
 }
 
