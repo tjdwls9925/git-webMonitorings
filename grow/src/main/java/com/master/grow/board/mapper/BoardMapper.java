@@ -1,10 +1,12 @@
 package com.master.grow.board.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.master.grow.board.to.boardFileTO;
 import com.master.grow.board.to.boardTO;
 
 @Mapper
@@ -21,5 +23,11 @@ public interface BoardMapper {
 	public int DeleteBoardContent(@Param("boardSeq") String boardSeq, @Param("userID") String userID);
 
 	public void UserViewsCount(@Param("boardSeq") String boardSeq ,@Param("count") int count);
+
+	public int insertBoardFileList(List<boardFileTO> list);
+
+	public int InsertFileUpload(List<boardFileTO> list) throws Exception;
+
+	public boardTO SelectBoardSeq();
 
 }

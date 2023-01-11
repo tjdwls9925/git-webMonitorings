@@ -85,18 +85,12 @@
 				
 
 				<div class="mb-3 d-flex align-items-center">
-
-		<form id="frm" name="frm" method="post" action="/board/insertBoard.do" enctype="multipart/form-data">
-			...
-			<input type="file" id="files" name="files" multiple="multiple">
-			<input type="submit" id="submit" value="저장" class="btn">
-		</form>
+					<input type="file" id="attachFile" multiple="multiple">
 				</div>
 				
 			<div style="float:right; margin-bottom: 10px;">	
 			<a class="btn btn-primary" onclick="history.back()"  href="#">뒤로가기</a>
 			<a id="insert_board_btn" class="btn btn-primary " href="#">등록하기</a>
-			<button id="check_img">이미지 확인</button>
 			</div>
 			</div>
        
@@ -110,9 +104,10 @@
         
         	$(document).ready(function(){
         		
+
         		
         		
-        		
+
         		const user = "<%=user%>";
         		
         		$("#reg_id").val(user);
@@ -152,11 +147,36 @@
 										    async: "false",
 										    success: function (data) {
 										    	if(data.msgCode == 1){
-										    		swal.fire({
-										    			icon : "success",
-										    			title : "등록이 완료되었습니다."
-										    		})
-										    		setTime();
+										    		if($("#attachFile").val() != ""){
+										    			
+										    			$.ajax({
+														    url: "${pageContext.request.contextPath}/board/SelectBoardSeq",
+														    dataType: "json",
+														    type: "GET",
+														    async: "false",
+														    success: function (data) {
+																console.log(data.boardSeq.boardSeq);
+																console.log($("#attachFile")[0].files.length);
+																let fileLength = $("#attachFile")[0].files.length;
+																var formData = new FormData();
+																for(var i=0; i < $("#attachFile")[0].files.length; i++){
+																	
+																	var form = $("#attachFile")[0].files[i];
+																	var boardSeq = data.boardSeq.boardSeq;
+																	
+																	formData.append("boardSeq",boardSeq);
+																	formData.append('files',form);
+																	
+																}
+																	fileUpload(formData);
+
+																
+														    }
+														})
+
+										    		}else{
+										    			setTime();
+										    		}
 										    	}else{
 										    		swal.fire({
 										    			icon : "error",
@@ -173,9 +193,39 @@
         		
         		
 
-        		function setTime() {
+        	function setTime() {
 		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/freeBoard'", 1000)
 		    	}
+        	
+        	function fileUpload(formData){
+
+
+        			$.ajax({
+        		        type: "POST",
+        		        enctype: 'multipart/form-data',
+        		        url: "${pageContext.request.contextPath}/board/InsertFileUpload",
+        		        data:formData,
+        		        async: "false",
+        		        processData: false,
+        		        contentType: false,
+        		        cache: false,
+        		        timeout: 600000,
+        		        success: function (data) {
+							swal.fire({
+								icon : "success",
+								title : "완료되었습니다."
+							})
+
+							setTime();
+        		        }
+        		    });
+        		
+        		
+        		
+
+        		
+
+        	}	
 
         	
         	

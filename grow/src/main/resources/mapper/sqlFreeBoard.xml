@@ -56,5 +56,35 @@
 	
 	</update>
 	
+	
+	<insert id="InsertFileUpload" parameterType="com.master.grow.board.to.boardFileTO">
+		<![CDATA[
+			INSERT INTO t_file
+			( 
+				board_idx, 
+				original_file_name, 
+				stored_file_path, 
+				file_size, 
+				creator_id, 
+				created_datetime
+			)
+			VALUES	
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(
+			#{item.boardIdx},
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize},
+			'admin',
+			NOW()
+		)
+		</foreach>
+	</insert>
+	
+	<select id="SelectBoardSeq" resultMap="getSelectAllBoardListMap">
+		select * from free_board order by board_seq desc limit 0,1
+	</select>
+	
 
 </mapper>

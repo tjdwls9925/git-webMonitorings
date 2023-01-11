@@ -2,6 +2,8 @@ package com.master.grow.board.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.master.grow.board.to.boardTO;
 
 public interface BoardService {
@@ -17,5 +19,9 @@ public interface BoardService {
 	public int DeleteBoardContent(String boardSeq, String userID);
 
 	public void UserViewsCount(String boardSeq ,int count);
+
+	public int InsertFileUpload(int boardSeq, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
+
+	public boardTO SelectBoardSeq();
 
 }
