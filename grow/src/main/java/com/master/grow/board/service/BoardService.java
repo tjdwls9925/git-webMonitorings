@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.master.grow.board.to.boardFileTO;
 import com.master.grow.board.to.boardTO;
 
 public interface BoardService {
@@ -24,4 +25,9 @@ public interface BoardService {
 
 	public boardTO SelectBoardSeq();
 
+	public ArrayList<boardFileTO> getSelectBoardFileList(int boardSeq);
+
+	boardFileTO selectBoardFileInformation(int idx, int boardIdx) throws Exception;
+
+	public int SelectFileDelete(int idx, int boardSeq);
 }

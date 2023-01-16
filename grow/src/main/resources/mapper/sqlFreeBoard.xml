@@ -86,5 +86,41 @@
 		select * from free_board order by board_seq desc limit 0,1
 	</select>
 	
+	<select id="getSelectBoardFileList" resultMap="getSelectBoardFileListMap">
+		select * from t_file
+		where board_idx = #{boardSeq}
+		AND deleted_yn = 'N'
+	</select>
+	
+	<resultMap type="com.master.grow.board.to.boardFileTO" id="getSelectBoardFileListMap">
+				<result property="idx" column="idx"></result>
+				<result property="boardIdx" column="board_idx"></result>
+				<result property="originalFileName" column="original_file_name"></result>
+				<result property="storedFilePath" column="stored_file_path"></result>
+				<result property="fileSize" column="file_size"></result>
+	</resultMap>
+	
+<select id="selectBoardFileInformation" parameterType="map" resultType="com.master.grow.board.to.boardFileTO">
+		<![CDATA[
+			SELECT
+				original_file_name,
+				stored_file_path,
+				file_size
+			FROM
+				t_file
+			WHERE
+				idx = #{idx}
+				AND board_idx = #{boardIdx}
+				AND deleted_yn = 'N'
+		]]>
+	</select>
+
+
+<update id="SelectFileDelete">
+	update t_file set deleted_yn = 'Y'
+	where 
+	board_idx = #{boardSeq}
+	AND idx = #{idx}
+</update>
 
 </mapper>

@@ -15,6 +15,17 @@
         
         <style>
         
+        	.deleteX{
+        		margin-left: 10px;
+        		cursor: pointer;
+        		font-size:14px;
+        		font-weight: bold;
+        	}
+        	.deleteX:hover{
+        		color:#6F2534;
+
+        	}
+        
         	div ul li{
         		margin-left: 5px;
         		margin-light:5px;
@@ -29,6 +40,15 @@
         	color: black;
         	text-decoration: none;
         }
+        
+        .fileListField{
+        	cursor: pointer;
+        	align-items: center;
+        }
+        .fileListField:hover{
+        	color: #4079BF;
+        }
+
         
         </style>
         
@@ -105,16 +125,38 @@
 
 				
 
-				<div class="mb-3 d-flex align-items-center">
+				<div class="mb-3 align-items-center">
 
-					<label for="tag">첨부파일</label>
 
+					<div id="file_content_box" class="">
 					
-					<i class="fa-solid fa-paperclip" style="margin-left: 10px; cursor: pointer;"></i>
-					<span style="margin-left: 10px;">파일명</span>
+					</div>
+					
 				</div>
 				
-			<div style="float:right; margin-bottom: 10px;">	
+				<div>
+				
+					<h2>댓글</h2>
+					<label for="content">내용</label>
+
+					<textarea class="form-control" rows="3"></textarea>
+					
+					<h2 style="margin-top: 10px;">댓글목록</h2>
+					<table>
+						<tr>
+							<td style="margin-top: 5px;">작성자 명</td>
+						</tr>
+						<tr>
+							<td style="margin-top: 5px;"><span>글 내용 삽입될곳.</span></td>
+						</tr>
+						<tr>
+							<td style="margin-top: 5px;"><button>답글</button></td>
+						</tr>
+						
+					</table>
+				</div>
+				
+			<div style="float:right;margin-top: 10px; margin-bottom: 10px;">	
 				<a class="btn btn-primary" onclick="history.back()"  href="#">뒤로가기</a>
 				<a id="update_board_btn" class="btn btn-info" href="#">수정하기</a>
 				<a id="update_success_btn" class="btn btn-info" href="#">수정완료</a>
@@ -164,12 +206,46 @@
     				    		$("#content").val(data.board.boardContent);
     				    		$("#update_time").val(data.board.boardUpdateDate)
     				    		$("#update_success_btn").hide();
+    				    		
+    				    		fileList();
     				    	
     				    }
     				})
     				
     				
+    				
+    				
     				$("#update_board_btn").click(function(){
+    					
+    	       			$.ajax({
+    					    url: "${pageContext.request.contextPath}/board/SelectBoardFileUploadList",
+    					    dataType: "json",
+    					    type: "GET",
+    					    data : {
+    					    	boardSeq : "<%=boardSeq%>"
+    					    },
+    					    async: "false",
+    					    success: function (data) {
+
+    					    	if(data.fileList == "null"){
+    					    		console.log("첨부파일 존재하지않음")
+    					    	}else{
+    					    		console.log(data.fileList);
+    					    		let str = "<h2>첨부파일</h2>";
+    					    		
+    					    		for(var x = 0 ; x< data.fileList.length; x++){
+    					    			str += "<span class='fileListField' onclick=fileDownLoad("+data.fileList[x].idx+")>" + data.fileList[x].originalFileName + "</span> <span class='deleteX' onclick=fileDelete("+data.fileList[x].idx+")> X </span> <br> "
+    					    		}
+    					    		
+    					    		
+    					    		$("#file_content_box").html(str);
+    					    	}
+
+    					    	
+    					    }
+    					})
+    					
+    					
     					$("#title").attr('readonly',false);
     					$("#content").attr('readonly',false);
     					$("#update_board_btn").hide();
@@ -233,7 +309,7 @@
 							  showCancelButton: true,
 							  confirmButtonColor: '#3085d6',
 							  cancelButtonColor: '#d33',
-							  confirmButtonText: '등록하기',
+							  confirmButtonText: '삭제',
 							  cancelButtonText: '취소'
 							}).then((result) => {
 								  if (result.isConfirmed) {
@@ -266,11 +342,84 @@
 											    }
 											}) 
     									})
+    									
+    									
+    									
        								})
        								
        		function setTime() {
 		        setTimeout("location.href = '${pageContext.request.contextPath}/webMain/freeBoard'", 1000)
 		    }
+       			
+       		function fileList(){
+       			$.ajax({
+				    url: "${pageContext.request.contextPath}/board/SelectBoardFileUploadList",
+				    dataType: "json",
+				    type: "GET",
+				    data : {
+				    	boardSeq : "<%=boardSeq%>"
+				    },
+				    async: "false",
+				    success: function (data) {
+
+				    	if(data.fileList == "null"){
+				    		console.log("첨부파일 존재하지않음")
+				    	}else{
+				    		console.log(data.fileList);
+				    		let str = "<h2>첨부파일</h2>";
+				    		
+				    		for(var x = 0 ; x< data.fileList.length; x++){
+				    			str += "<span class='fileListField' onclick=fileDownLoad("+data.fileList[x].idx+")>" + data.fileList[x].originalFileName + "</span><br> "
+				    		}
+				    		
+				    		
+				    		$("#file_content_box").html(str);
+				    	}
+
+				    	
+				    }
+				})
+       		}
+       		
+       		function fileDownLoad(idx){
+       			let boardSeq = "<%=boardSeq%>";
+       			window.location.href = "${pageContext.request.contextPath}/board/FileDownLoad?idx="+idx+"&boardIdx="+boardSeq;
+       		}
+       		
+       		function fileDelete(idx){
+       			let boardSeq = "<%=boardSeq%>";
+       			console.log(idx);
+       			
+       			$.ajax({
+				    url: "${pageContext.request.contextPath}/board/SelectFileDelete",
+				    dataType: "json",
+				    type: "PUT",
+				    data : {
+				    	boardSeq : boardSeq,
+				    	idx : idx
+				    },
+				    async: "false",
+				    success: function (data) {
+				    	
+				    	if(data.fileList == "null"){
+				    		console.log("첨부파일 존재하지않음")
+				    	}else{
+				    		console.log(data.fileList);
+				    		let str = "<h2>첨부파일</h2>";
+				    		
+				    		for(var x = 0 ; x< data.fileList.length; x++){
+				    			str += "<span class='fileListField' onclick=fileDownLoad("+data.fileList[x].idx+")>" + data.fileList[x].originalFileName + "</span> <span class='deleteX' onclick=fileDelete("+data.fileList[x].idx+")> X </span> <br> "
+				    		}
+				    		
+				    		
+				    		$("#file_content_box").html(str);
+				    	}
+
+				    	
+				    }
+				})
+       			
+       		}
        								
        </script>
        

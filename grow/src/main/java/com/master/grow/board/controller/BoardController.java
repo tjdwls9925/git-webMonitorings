@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -19,6 +22,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.master.grow.board.service.BoardService;
 import com.master.grow.board.to.boardFileTO;
 import com.master.grow.board.to.boardTO;
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+import java.net.URLEncoder;
 
 @CrossOrigin
 @RestController
@@ -206,6 +212,83 @@ public class BoardController {
 			int result = boardService.InsertFileUpload(boardSeq,multipartHttpServletRequest);
 		
 			map.put("result", result);
+
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/SelectBoardFileUploadList" ,method = RequestMethod.GET)
+	public ModelMap SelectBoardFileUploadList(HttpServletRequest request, HttpServletResponse response) {
+		map = new ModelMap();
+			
+		
+			String boardSeqParam = request.getParameter("boardSeq");
+			int boardSeq = Integer.parseInt(boardSeqParam);
+			ArrayList<boardFileTO> fileList = boardService.getSelectBoardFileList(boardSeq);
+		
+			try {
+				
+				if(fileList.size() == 0) {
+					map.put("fileList", "null");
+				}else {
+					map.put("fileList", fileList);					
+				}
+				
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		
+
+		
+		return map;
+	}
+	
+	@GetMapping("/FileDownLoad")
+	public void downloadBoardFile(@RequestParam int idx, @RequestParam int boardIdx, HttpServletResponse response) throws Exception {
+		
+		System.out.println(idx);
+		System.out.println(boardIdx);
+		boardFileTO boardFile = boardService.selectBoardFileInformation(idx, boardIdx);
+		System.out.println(boardFile.getStoredFilePath());
+		
+		
+		if(ObjectUtils.isEmpty(boardFile) == false) {
+			String fileName = boardFile.getOriginalFileName();
+			
+			byte[] files = FileUtils.readFileToByteArray(new File(boardFile.getStoredFilePath()));
+			
+			response.setContentType("application/octet-stream");
+			response.setContentLength(files.length);
+			response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName, "UTF-8")+"\";");
+			
+			response.getOutputStream().write(files);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		}
+	}
+	
+	
+	@RequestMapping(value = "/SelectFileDelete" ,method = RequestMethod.PUT)
+	public ModelMap SelectFileDelete(@RequestParam int idx , @RequestParam int boardSeq ,  HttpServletRequest request, HttpServletResponse response) {
+		map = new ModelMap();
+			
+			int result = boardService.SelectFileDelete(idx,boardSeq);
+			
+			
+		
+			try {
+				if(result == 1) {
+					ArrayList<boardFileTO> fileList = boardService.getSelectBoardFileList(boardSeq);
+					map.put("fileList", fileList);
+				}else {
+					map.put("error", 0);
+				}
+				
+				
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
+		
 
 		
 		return map;

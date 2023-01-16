@@ -88,4 +88,19 @@ public class BoardServiceImpl implements BoardService {
 		return boardSeq;
 	}
 	
+	public ArrayList<boardFileTO> getSelectBoardFileList(int boardSeq){
+		ArrayList<boardFileTO> fileList = boardMapper.getSelectBoardFileList(boardSeq);
+		return fileList;
+	}
+	
+	public boardFileTO selectBoardFileInformation(int idx, int boardIdx) throws Exception {
+		return boardMapper.selectBoardFileInformation(idx, boardIdx);
+	}	
+	
+	public int SelectFileDelete(int idx, int boardSeq) {
+		
+		int result = boardMapper.SelectFileDelete(idx,boardSeq);
+		
+		return result;
+	}
 }

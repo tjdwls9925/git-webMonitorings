@@ -30,4 +30,9 @@ public interface BoardMapper {
 
 	public boardTO SelectBoardSeq();
 
+	public ArrayList<boardFileTO> getSelectBoardFileList(@Param("boardSeq") int boardSeq);
+
+	boardFileTO selectBoardFileInformation(@Param("idx") int idx, @Param("boardIdx") int boardIdx);
+
+	public int SelectFileDelete(@Param("idx")int idx, @Param("boardSeq") int boardSeq);
 }
