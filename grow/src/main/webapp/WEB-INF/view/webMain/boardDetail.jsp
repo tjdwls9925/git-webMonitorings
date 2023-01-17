@@ -134,27 +134,6 @@
 					
 				</div>
 				
-				<div>
-				
-					<h2>댓글</h2>
-					<label for="content">내용</label>
-
-					<textarea class="form-control" rows="3"></textarea>
-					
-					<h2 style="margin-top: 10px;">댓글목록</h2>
-					<table>
-						<tr>
-							<td style="margin-top: 5px;">작성자 명</td>
-						</tr>
-						<tr>
-							<td style="margin-top: 5px;"><span>글 내용 삽입될곳.</span></td>
-						</tr>
-						<tr>
-							<td style="margin-top: 5px;"><button>답글</button></td>
-						</tr>
-						
-					</table>
-				</div>
 				
 			<div style="float:right;margin-top: 10px; margin-bottom: 10px;">	
 				<a class="btn btn-primary" onclick="history.back()"  href="#">뒤로가기</a>
@@ -162,7 +141,7 @@
 				<a id="update_success_btn" class="btn btn-info" href="#">수정완료</a>
 				<a id="delete_board_btn" class="btn btn-danger" href="#">삭제하기</a>
 			</div>
-			</div>
+		</div>
        
         
 
