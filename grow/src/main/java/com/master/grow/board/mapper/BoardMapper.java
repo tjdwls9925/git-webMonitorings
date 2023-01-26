@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.master.grow.board.to.boardCommentTO;
 import com.master.grow.board.to.boardFileTO;
 import com.master.grow.board.to.boardTO;
 
@@ -35,4 +36,5 @@ public interface BoardMapper {
 	boardFileTO selectBoardFileInformation(@Param("idx") int idx, @Param("boardIdx") int boardIdx);
 
 	public int SelectFileDelete(@Param("idx")int idx, @Param("boardSeq") int boardSeq);
+
 }

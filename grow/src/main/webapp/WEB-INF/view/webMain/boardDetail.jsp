@@ -75,7 +75,7 @@
         <!-- Masthead-->
         
         <div class="container">
-
+	
 			<h2 class="mt-3">누구님의 게시글</h2>
 
 				<div class="mb-3 mt-4">
@@ -150,13 +150,16 @@
        <script>
        			$(document).ready(function(){
        				
+       					let boardSeq = "<%=boardSeq%>";
+       				
+       				
 
        				$.ajax({
     				    url: "${pageContext.request.contextPath}/board/SelectBoardDetailContent",
     				    dataType: "json",
     				    type: "GET",
     				    data : {
-    				    	boardSeq : "<%=boardSeq%>"
+    				    	boardSeq : boardSeq
     				    },
     				    async: "false",
     				    success: function (data) {
@@ -187,6 +190,7 @@
     				    		$("#update_success_btn").hide();
     				    		
     				    		fileList();
+    				    		//replyList(boardSeq);
     				    	
     				    }
     				})
@@ -399,6 +403,10 @@
 				})
        			
        		}
+       		
+
+       		
+       		
        								
        </script>
        

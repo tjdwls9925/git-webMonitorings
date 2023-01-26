@@ -8,18 +8,14 @@ import lombok.Data;
 public class boardCommentTO {
 
 	@JsonProperty
-	private String reply_id;
+	private int rno;
 	@JsonProperty
-	private String board_id;
+	private int bno;
 	@JsonProperty
-	private String parent_id;
+	private String writer;
 	@JsonProperty
-	private String depth;
+	private String content;
 	@JsonProperty
-	private String reply_content;
-	@JsonProperty
-	private String reply_writer;
-	@JsonProperty
-	private String register_datetime;
+	private String regDate;
 	
 }
