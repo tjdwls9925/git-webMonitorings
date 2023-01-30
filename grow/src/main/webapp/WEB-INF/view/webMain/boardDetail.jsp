@@ -76,7 +76,7 @@
         
         <div class="container">
 	
-			<h2 class="mt-3">누구님의? 게시글</h2>
+			<h2 class="mt-3">누구님의 게시글</h2>
 
 				<div class="mb-3 mt-4">
 
